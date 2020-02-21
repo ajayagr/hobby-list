@@ -74,8 +74,14 @@ const Main: React.FC<MainProps> = (props): ReactElement => {
             return hobby.name.toLowerCase() === newHobby.name.trim().toLowerCase();
         });
 
+        const cleanHobby = {
+            passionLevel: newHobby.passionLevel,
+            name: newHobby.name.trim(),
+            startYear: newHobby.startYear
+        }
+
         if(hobbyExistsIndex === -1){
-            props.addHobby(newHobby.name.trim(), userId);
+            props.addHobby(cleanHobby, userId);
         }else{
             alert (`Same hobby can't be added twice!! "${newHobby.name.trim()}" already exists.`);
         }

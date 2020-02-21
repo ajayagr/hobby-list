@@ -10,7 +10,7 @@ type AddHobyProps = Readonly<{
 const AddHobby: React.FC<AddHobyProps> = (props): ReactElement => {
     const [passionLevel, setpassionLevel] = useState("Low");
     const [hobbyName, sethobbyName] = useState("");
-    const [startYear, setstartYear] = useState(new Date().getFullYear());
+    const [startYear, setstartYear] = useState("1900");
 
     if(props.selectedUserId === -1){
         return (<div></div>);
@@ -20,7 +20,7 @@ const AddHobby: React.FC<AddHobyProps> = (props): ReactElement => {
     }
     
     const startYearChangeHandler = (event: React.FormEvent<HTMLInputElement>): void => {
-        setstartYear(Number(event.currentTarget.value));
+        setstartYear(event.currentTarget.value);
     }
 
     const hobbyNameChangeHandler = (event: React.FormEvent<HTMLInputElement>): void => {
