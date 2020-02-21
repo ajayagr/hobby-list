@@ -1,0 +1,35 @@
+$containerWidth:80%;
+$userMinWidth: 5vw;
+$hobbyMinWidth: 20vw;
+$resizeableContainerBorder: 2px solid grey;
+
+@mixin resizeableContainer($minWidth, $border) {
+    resize: both;
+    overflow: auto;
+    box-sizing: border-box;
+    border: $border;
+    margin-right: 5px;
+    min-width: $minWidth;
+}
+
+.Container{
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    flex-grow: 1;
+    box-sizing: border-box;
+    max-width: $containerWidth;
+    margin-top: 10vh;
+
+    .Users{
+        @include resizeableContainer($userMinWidth, $resizeableContainerBorder);
+        width:30%;
+        max-width: 70%;
+    }
+
+    .Hobbies{
+        @include resizeableContainer($hobbyMinWidth, $resizeableContainerBorder);
+        width:70%;
+    }
+
+}
