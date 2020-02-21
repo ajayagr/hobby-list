@@ -46,10 +46,13 @@ function addUser (state:AppState, userName: string) : AppState {
 }
 
 function addHobby (state:AppState, hobby:any, userId: Number) : AppState {
-    const userIndex: number = state.users.findIndex((user: User) => user.id === userId);
-    const users = [...state.users]
+    const userIndex: number = state.users.findIndex((user: User) => {
+        return user.id === userId}
+    );
+    const users = [...state.users];
     const selectedUser = {...users[userIndex]};
     
+    // console.log(selectedUser);
     let newHobbies: Hobby[] = [...selectedUser.hobbies];
     let newHobby: Hobby;
 
@@ -60,11 +63,13 @@ function addHobby (state:AppState, hobby:any, userId: Number) : AppState {
         newHobby = {id:currHobbyId+1, passionLevel:hobby.passionLevel, name:hobby.name, startYear: hobby.startYear};
     }
 
-    newHobbies.push(newHobby);
-    selectedUser.hobbies = newHobbies;
+    // console.log(newHobby);
 
+    newHobbies.push(newHobby);    
+    selectedUser.hobbies = newHobbies;
     users[userIndex] = selectedUser;
 
+    // console.log(users);
     return {users: users};
 }
 

@@ -8,18 +8,34 @@ $resizeableContainerBorder: 2px solid grey;
     overflow: auto;
     box-sizing: border-box;
     border: $border;
-    margin-right: 5px;
+    margin: 5px;
     min-width: $minWidth;
 }
 
 .Container{
     display: flex;
-    flex-direction: row;
+    flex-flow: column wrap;
     margin: auto;
     flex-grow: 1;
     box-sizing: border-box;
     max-width: $containerWidth;
-    margin-top: 10vh;
+    margin-top: 5vh;
+    border: 2px solid black;
+
+    .Title{
+        font-size: large;
+        font-weight: bold;
+        border-bottom: 1px solid;
+    }
+}
+
+.Data{
+    display: flex;
+    flex-flow: row nowrap;
+    margin: none;
+    flex-grow: 1;
+    box-sizing: border-box;
+    max-width: 100%;
 
     .Users{
         @include resizeableContainer($userMinWidth, $resizeableContainerBorder);
@@ -31,5 +47,4 @@ $resizeableContainerBorder: 2px solid grey;
         @include resizeableContainer($hobbyMinWidth, $resizeableContainerBorder);
         width:70%;
     }
-
 }

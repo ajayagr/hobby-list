@@ -1,0 +1,39 @@
+.Hobby{
+    color: #24292e;
+    background-color: #fff;
+    border-bottom: 1px solid #d1d5da;
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 2px;
+    margin-bottom:5px;
+    display: flex;
+    flex-flow: row wrap;
+
+    .HobbyDetails{
+        width:85%;
+        margin-right:2px;
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    .Delete{
+        width: 10%;
+        margin-right:4px;
+    }
+}
+
+.HobbyDetails{
+    .Passion{
+        width:20%;
+        margin-right: 2px;
+    }
+    
+    .HobbyName{
+        width: 50%;
+        margin-right: 2px;
+    }
+    .Year{
+        width: 20%;
+        margin-right: 2px;
+    }
+}
