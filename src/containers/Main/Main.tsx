@@ -1,12 +1,14 @@
-import React, { ReactElement, useState} from 'react';
+import React, { ReactElement, useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Dispatch} from 'redux';
 import {User, AppState, Hobby, PassionLevel} from '../../store/stores/store';
+import axios from 'axios';
 
 import UserList from '../../components/UserList/UserList';
 import HobbyList from '../../components/UserList/User/HobbyList/HobbyList';
 import AddUser from '../../components/forms/AddUser/AddUser';
 import AddHobby from '../../components/forms/AddHobby/AddHobby';
+import Spinner from '../../components/UI/spinner/Spinner';
 
 import * as actions from '../../store/actions/actionTypes';
 import classes from './Main.module.scss';
@@ -18,21 +20,38 @@ type newHobby= Readonly<{
 }>
 
 type MainProps = Readonly<{
-    userList: User[];
-    addUser: Function;
-    addHobby: Function;
-    deleteHobby: Function;
+    userList: User[],
+    initializeUsers: Function,
+    addUser: Function,
+    addHobby: Function,
+    deleteHobby: Function
 }>
 
 const Main: React.FC<MainProps> = (props): ReactElement => {
+    const [isLoading, setisLoading] = useState(false);
     const [selectedUserId, setselectedUserId] = useState(-1);
-    // const [errMsg, seterrMsg] = useState("");
+
+    useEffect(() => {
+        setisLoading(true);
+        axios.get("https://hobby-lister-6daf1.firebaseio.com/initialState.json")
+            .then((response) => {
+                let userList = [];
+                for(let key in response.data) {
+                    userList = response.data[key];
+                }
+                props.initializeUsers(userList);
+                setisLoading(false);
+            })
+            .catch(err => {
+                console.log(err);
+                setisLoading(false);
+            });
+    }, []);
+
 
     const userSelectHandler = (id: number): void => {
         setselectedUserId(id);
     }
-
-
     let hobbyList: Hobby[] | null;
     
     //If no user is selected than, keep the hobbyList to null else populate hobbies
@@ -74,6 +93,13 @@ const Main: React.FC<MainProps> = (props): ReactElement => {
         }
     }
 
+    //If waiting for data from API call then show spinner
+    const userList = isLoading ?  (<Spinner />) :
+                    (<UserList 
+                        users={props.userList} 
+                        onClick={userSelectHandler} 
+                        selectedUserId = {selectedUserId}/> )
+
     return(
         <div className={classes.Container}>
             <div className={classes.Title}>
@@ -82,7 +108,7 @@ const Main: React.FC<MainProps> = (props): ReactElement => {
             <div className={classes.Data}>
                 <div className={classes.Users}>
                     <AddUser addUser={props.addUser}/>
-                    <UserList users={props.userList} onClick={userSelectHandler} selectedUserId = {selectedUserId}/>
+                    {userList}
                 </div>
                 <div className={classes.Hobbies}>
                     <AddHobby selectedUserId = {selectedUserId} addHobby={addHobby}/>
@@ -101,6 +127,7 @@ const mapStateToProps = (state: AppState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
+        initializeUsers: (userList: User[]) => dispatch({type:actions.INITIALIZE_USERS, initialUsers: userList}),
         addUser: (name: string) => dispatch({type:actions.ADD_USER, name:name}),
         addHobby: (hobby: object, userId: number) => dispatch({type:actions.ADD_HOBBY, newHobby:hobby, userId: userId}),
         deleteHobby: (userId:number, hobbyId:number) => dispatch({type:actions.DELETE_HOBBY, userId, hobbyId})

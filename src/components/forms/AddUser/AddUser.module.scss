@@ -1,12 +1,8 @@
-.Form{
-    color: #24292e;
-    border-bottom: 1px solid brown;
-    overflow: auto;
-    box-sizing: border-box;
-    padding: 2px;
-    margin-bottom:1vh;
+@import "../../../style/Form.module.scss";
 
-    input{
-        margin: 5px
+.FormInline{
+    .UserName{
+        width: 60%;
+        margin:5px;
     }
 }

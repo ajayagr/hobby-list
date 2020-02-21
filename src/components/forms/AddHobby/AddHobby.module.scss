@@ -1,21 +1,16 @@
-.Form{
-    color: #24292e;
-    border-bottom: 1px solid brown;
-    overflow: auto;
-    box-sizing: border-box;
-    padding: 2px;
-    margin-bottom:1vh;
+@import "../../../style/Form.module.scss";
 
+.FormInline{
     .Passion{
+        margin: 5px;
         width:20%;
-        margin:5px;
     }
     .HobbyName{
-        width:40%;
         margin:5px;
+        width:40%
     }
     .StartYear{
-        width:20%;
         margin:5px;
+        width:20%;
     }
 }

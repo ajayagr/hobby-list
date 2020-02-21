@@ -20,14 +20,7 @@ export type AppState = {
 };
 
 const initialState : AppState = {
-    users: [{
-        id: 1,
-        name: "Ajay",
-        hobbies: [
-            {id: 1, passionLevel: "High", name:"Badminton", startYear:2002},
-            {id: 2, passionLevel:"Low", name:"Watching anime", startYear:2010}
-                ]
-    }]
+    users: []
 }
 
 function addUser (state:AppState, userName: string) : AppState {
@@ -90,17 +83,30 @@ function deleteHobby (state:AppState, hobbyId:number, userId: Number) : AppState
     return {users: users};
 }
 
+function initializeUsers (state: AppState, userList: User[]): AppState {
+    console.log(userList);
+    return {users: userList};
+}
+
 const reducer = (state=initialState, action:any) => {
-    switch(action.type){
-        case(actionType.ADD_USER): 
-            return addUser(state, action.name);
-        case (actionType.ADD_HOBBY):
-            return addHobby(state, action.newHobby, action.userId);
-        case (actionType.DELETE_HOBBY):
-            return deleteHobby(state, action.hobbyId, action.userId);
-        default:
-            return state;
-    }
+    // try{
+        switch(action.type){
+            case(actionType.INITIALIZE_USERS):
+                return initializeUsers(state, action.initialUsers);
+            case(actionType.ADD_USER): 
+                return addUser(state, action.name);
+            case (actionType.ADD_HOBBY):
+                return addHobby(state, action.newHobby, action.userId);
+            case (actionType.DELETE_HOBBY):
+                return deleteHobby(state, action.hobbyId, action.userId);
+            default:
+                return state;
+        }
+    // }catch(error){
+    //     console.error(error);
+    //     alert("Some exception occured!!!");
+    //     return state;
+    // }
 };
 
 export default reducer;

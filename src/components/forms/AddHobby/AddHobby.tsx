@@ -33,7 +33,7 @@ const AddHobby: React.FC<AddHobyProps> = (props): ReactElement => {
     }
 
     return(
-        <form className={classes.Form} name="addUser" onSubmit={formSubmitHandler}>
+        <form className={classes.FormInline} name="addUser" onSubmit={formSubmitHandler}>
             <select className={classes.Passion} required name="passionLevel" defaultValue={passionLevel} onChange={passionChangeHandler} title="How Passionate are you?">
                 <option value="Low"> Low </option>
                 <option value="Medium"> Medium </option>

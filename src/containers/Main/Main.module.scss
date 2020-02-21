@@ -14,8 +14,9 @@ $resizeableContainerBorder: 2px solid grey;
 
 .Container{
     display: flex;
+    flex-direction: column;
     flex-flow: column wrap;
-    margin: auto;
+    margin:auto;
     flex-grow: 1;
     box-sizing: border-box;
     max-width: $containerWidth;
