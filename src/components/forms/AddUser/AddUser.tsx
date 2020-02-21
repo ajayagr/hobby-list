@@ -20,7 +20,9 @@ const AddUser: React.FC<AddUserProps> = (props): ReactElement => {
 
     return(
         <form className={classes.FormInline} name="addUser" onSubmit={formSubmitHandler}>
-            <input required className={classes.UserName} type="text" name="newUserName" placeholder="Enter new user's name..." value={userName} onChange={userNameChangeHandler}/>
+            <input required className={classes.UserName} type="text" title="New User's name"
+                name="newUserName" placeholder="Enter new user's name..." 
+                value={userName} onChange={userNameChangeHandler}/>
             <button type="submit">Add User</button>
         </form>
     );

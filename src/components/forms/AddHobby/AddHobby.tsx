@@ -10,7 +10,7 @@ type AddHobyProps = Readonly<{
 const AddHobby: React.FC<AddHobyProps> = (props): ReactElement => {
     const [passionLevel, setpassionLevel] = useState("Low");
     const [hobbyName, sethobbyName] = useState("");
-    const [startYear, setstartYear] = useState("1900");
+    const [startYear, setstartYear] = useState("");
 
     if(props.selectedUserId === -1){
         return (<div></div>);
@@ -41,7 +41,7 @@ const AddHobby: React.FC<AddHobyProps> = (props): ReactElement => {
                 <option value="Very-High"> Very High </option>
             </select>
             <input className={classes.HobbyName} required type="text" name="hobbyName" placeholder="Enter hobby name..." value={hobbyName} onChange={hobbyNameChangeHandler} title="Hobby Title"/>
-            <input className={classes.StartYear} type="number" min="1900" max={new Date().getFullYear()} name="startYear" placeholder="Hobby Since" value={startYear} onChange={startYearChangeHandler} title="Hobby since....?"/>
+            <input className={classes.StartYear} required type="number" min="1900" max={new Date().getFullYear()} name="startYear" placeholder="Hobby Since" value={startYear} onChange={startYearChangeHandler} title="Hobby since....?"/>
             <button type="submit">Add Hobby</button>
         </form>
     );

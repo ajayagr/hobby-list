@@ -7,11 +7,16 @@ import classes from './User.module.scss';
 type UserProps = Readonly<{
     user: UserType
     onClick: Function
+    isSelected: boolean
 }>
 
 const User: React.FC<UserProps> = (props): ReactElement => {
+    const userClass = [classes.User];
+    if(props.isSelected){
+        userClass.push(classes.Active);
+    }
     return(
-        <div className={classes.User} onClick={() => props.onClick(props.user.id)}>
+        <div className={userClass.join(" ")} onClick={() => props.onClick(props.user.id)}>
             {props.user.name}
         </div>
     );

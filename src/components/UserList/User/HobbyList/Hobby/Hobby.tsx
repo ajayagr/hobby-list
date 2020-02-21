@@ -18,7 +18,7 @@ const Hobby: React.FC<HobbyProps> = (props): React.ReactElement => {
                 <div className={classes.HobbyName}>{`${props.hobby.name}`}</div>
                 <div className={classes.Year}>{`Since ${props.hobby.startYear}`}</div>
             </div>
-            <div className={classes.Delete} onClick={() => props.deleteHobby(props.selectedUserId, props.hobby.id)} title="Delete Hobby" >
+            <div className={classes.Delete} onClick={() => props.deleteHobby(props.selectedUserId, props.hobby.id, props.hobby.name)} title="Delete Hobby" >
                 <Delete />
             </div>
         </div>

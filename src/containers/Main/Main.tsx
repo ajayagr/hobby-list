@@ -91,10 +91,10 @@ const Main: React.FC<MainProps> = (props): ReactElement => {
     deletes a hobby from list of hobbies for the provided user and hobby
     validates whether deletion should be done or not via browser confirm method
     */
-    const deleteHobby = (userId: number, hobbyId: number): void => {
+    const deleteHobby = (userId: number, hobbyId: number, hobbyName: string): void => {
         console.log(userId, hobbyId);
         const userIndex = props.userList.findIndex((user: User) => user.id === userId);
-        if( window.confirm(`Are you sure you want to delete hobby: "${props.userList[userIndex].hobbies[hobbyId]}" ?`)){
+        if( window.confirm(`Are you sure you want to delete hobby "${hobbyName}" for user "${props.userList[userIndex].name}" ?`)){
             props.deleteHobby(userId, hobbyId);
         }
     }
@@ -109,7 +109,7 @@ const Main: React.FC<MainProps> = (props): ReactElement => {
     return(
         <div className={classes.Container}>
             <div className={classes.Title}>
-                <h3 style={{textAlign: "left"}}>User Hobbies</h3>
+                <h3 style={{textAlign: "left", marginLeft:"5px"}}>User Hobbies</h3>
             </div>
             <div className={classes.Data}>
                 <div className={classes.Users}>

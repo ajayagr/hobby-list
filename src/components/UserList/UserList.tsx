@@ -15,7 +15,7 @@ const UserList: React.FC<UserListProps> = (props): ReactElement => {
     let users: ReactElement[] | null = null;
     if(props.users){
         users = props.users.map((user: any) => {
-            return <User user={user} key={user.id} onClick={props.onClick}/>
+            return <User isSelected={user.id === props.selectedUserId} user={user} key={user.id} onClick={props.onClick}/>
         });
     }
 
